@@ -1,0 +1,55 @@
+## Interface: 60200
+## Title: SinarisUI
+## Author: Sinaris
+## Version: 2.0
+## OptionalDeps: !ClassColors
+## SavedVariables: sCoreDB
+## SavedVariablesPerCharacter: sCoreCDB
+
+Core\Init\Engine.lua
+Core\Init\Globals.lua
+Core\Init\Commands.lua
+
+Locales\Globals.lua
+Locales\enUS.lua
+
+Core\DataBase\Account.lua
+Core\DataBase\Character.lua
+Core\DataBase\Init.lua
+
+Libs\LibAnim\LibAnim.lua
+Libs\oUF_Core\oUF.xml
+Libs\Dongle\Dongle.lua
+
+Core\Init\Graphic.lua
+Core\Init\Medias.lua
+Core\Init\Math.lua
+Core\Init\Constructors.lua
+Core\Init\Toolkit.lua
+Core\Init\API.lua
+Core\Init\Templates.lua
+Core\Init\PopUps.lua
+Core\Init\Setup.lua
+Core\Init\Version.lua
+
+Modules\Layout\Layout.lua
+Modules\ActionBars\ActionBars.lua
+Modules\ChatFrames\ChatFrames.lua
+Modules\MicroMenu\MicroMenu.lua
+Modules\Maps\Minimap.lua
+
+##Modules\Plugins\Misc\AFKScreen.lua
+##Modules\Plugins\Misc\GameMenu.lua
+
+Core\Init\Load.lua
+
+Skinning\Blizzard\Others\DropDown.lua
+Skinning\Load.lua
+
+GUI\GUI.lua
+GUI\Intro.lua
+GUI\Minimap.lua
+
+Core\Init\Moving.lua
+
+Core\Init\Developer.lua
