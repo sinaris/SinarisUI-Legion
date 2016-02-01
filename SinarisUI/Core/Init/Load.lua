@@ -17,6 +17,7 @@ function EventFrame:PLAYER_LOGIN()
 	S['Templates_Fonts']()
 
 	S['Layout_Init']()
+	S['Auras_Init']()
 	S['Minimap_Init']()
 
 	--S['Plugin_GameMenu_Init']()

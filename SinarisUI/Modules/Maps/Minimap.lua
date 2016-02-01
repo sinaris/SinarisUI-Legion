@@ -255,11 +255,11 @@ local ApplyColorBorder = function()
 	local HasNewMail = HasNewMail()
 
 	if( CalendarGetNumPendingInvites > 0 and HasNewMail ) then
-		Map['Backdrop']:SetBackdropBorderColor( 1, 0.5, 0 )
+		Map['Backdrop']:SetBackdropBorderColor( sCoreCDB['Minimap']['Minimap_ColorNewMailAndInvite']['r'], sCoreCDB['Minimap']['Minimap_ColorNewMailAndInvite']['g'], sCoreCDB['Minimap']['Minimap_ColorNewMailAndInvite']['b'], sCoreCDB['Minimap']['Minimap_ColorNewMailAndInvite']['a'] )
 	elseif( CalendarGetNumPendingInvites > 0 and not HasNewMail ) then
-		Map['Backdrop']:SetBackdropBorderColor( 1, 0.08, 0.24 )
+		Map['Backdrop']:SetBackdropBorderColor( sCoreCDB['Minimap']['Minimap_ColorNewInvite']['r'], sCoreCDB['Minimap']['Minimap_ColorNewInvite']['g'], sCoreCDB['Minimap']['Minimap_ColorNewInvite']['b'], sCoreCDB['Minimap']['Minimap_ColorNewInvite']['a'] )
 	elseif( CalendarGetNumPendingInvites == 0 and HasNewMail ) then
-		Map['Backdrop']:SetBackdropBorderColor( 0, 1, 0 )
+		Map['Backdrop']:SetBackdropBorderColor( sCoreCDB['Minimap']['Minimap_ColorNewMail']['r'], sCoreCDB['Minimap']['Minimap_ColorNewMail']['g'], sCoreCDB['Minimap']['Minimap_ColorNewMail']['b'], sCoreCDB['Minimap']['Minimap_ColorNewMail']['a'] )
 	else
 		Map['Backdrop']:SetBackdropBorderColor( M['Colors']['General']['Border']['r'], M['Colors']['General']['Border']['g'], M['Colors']['General']['Border']['b'], M['Colors']['General']['Border']['a'] )
 	end

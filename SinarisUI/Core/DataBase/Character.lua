@@ -21,6 +21,10 @@ CharacterDataBase = {
 		['ActionBars_Enable'] = true,
 	},
 
+	['Auras'] = {
+		['Auras_Enable'] = true,
+	},
+
 	['ChatFrames'] = {
 		['ChatFrames_Enable'] = true,
 	},

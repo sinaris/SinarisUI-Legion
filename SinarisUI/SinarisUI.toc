@@ -34,6 +34,7 @@ Core\Init\Version.lua
 
 Modules\Layout\Layout.lua
 Modules\ActionBars\ActionBars.lua
+Modules\Auras\Auras.lua
 Modules\ChatFrames\ChatFrames.lua
 Modules\MicroMenu\MicroMenu.lua
 Modules\Maps\Minimap.lua
