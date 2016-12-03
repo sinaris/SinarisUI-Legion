@@ -7,26 +7,43 @@
 
 local S, L, M = select( 2, ... ):Unpack()
 
-local min, max = math.min, math.max
-local GetCVar = GetCVar
+--[[
+local format = string.format
 
-local UIScale
+local EventFrame = CreateFrame( 'Frame' )
+EventFrame:RegisterEvent( 'PLAYER_ENTERING_WORLD' )
+EventFrame:SetScript( 'OnEvent', function( self, event )
+	if( event == 'DISPLAY_SIZE_CHANGED' ) then
+
+	else
+		local UseUIScale = GetCVar( 'useUiScale' )
+		if( UseUIScale ~= '1' ) then
+			SetCVar( 'useUiScale', 1 )
+		end
+
+		if( format( '%.2f', GetCVar( 'uiScale' ) ) ~= format( '%.2f', 0.64 ) ) then
+			SetCVar( 'uiScale', 0.64 )
+		end
+
+		UIParent:SetScale( 0.64 )
+
+		self:UnregisterEvent( 'PLAYER_ENTERING_WORLD' )
+		self:RegisterEvent( 'DISPLAY_SIZE_CHANGED' )
+	end
+end )
+]]--
+
+local max, min, floor = math.max, math.min, math.floor
+local match = string.match
 
 S['PixelPerfect'] = function()
-	UIScale = min( 2, max( 0.64, 768 / string.match( GetCVar( 'gxResolution' ), '%d+x(%d+)' ) ) )
-
-	S['UIScale'] = UIScale
+	S['UIScale'] = min( 2, max( 0.64, 768 / match( S['ScreenResolution'], "%d+x(%d+)" ) ) )
 end
+
 S['PixelPerfect']()
 
-local Mult = 768 / string.match( GetCVar( 'gxResolution' ), '%d+x(%d+)' ) / S['UIScale']
-
-local function Scale( x )
-	return Mult * math.floor( x / Mult + 0.5 )
-end
-
+S['Mult'] = 768 / match( S['ScreenResolution'], "%d+x(%d+)" ) / S['UIScale']
 S['Scale'] = function( x )
-	return Scale( x )
+	return S['Mult'] * floor( x / S['Mult'] + .5 )
 end
-
-S['Mult'] = Mult
+S['NoScaleMult'] = S['Mult'] * S['UIScale']

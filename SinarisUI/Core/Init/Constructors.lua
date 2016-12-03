@@ -7,9 +7,6 @@
 
 local S, L, M = select( 2, ... ):Unpack()
 
-local unpack = unpack
-local CreateFrame = CreateFrame
-
 S['Construct_FontString'] = function( Parent, Layer, Type, Size, Style, JustifyH, Shadow )
 	local FontString = Parent:CreateFontString( nil, Layer or 'OVERLAY' )
 	FontString:SetFont( Type, Size, Style )
@@ -26,7 +23,6 @@ end
 S['Construct_StatusBar'] = function( Name, Parent, Texture, Color )
 	local StatusBar = CreateFrame( 'StatusBar', Name or nil, Parent or UIParent )
 	StatusBar:SetStatusBarTexture( Texture or M['Textures']['StatusBar'] )
-
 	if( Color ) then
 		StatusBar:SetStatusBarColor( unpack( Color ) )
 	end

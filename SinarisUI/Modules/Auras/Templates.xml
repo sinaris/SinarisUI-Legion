@@ -1,0 +1,230 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Button name="AurasTemplate" inherits="SecureActionButtonTemplate" virtual="true">
+		<Size x="30" y="30"/>
+
+		<Attributes>
+			<Attribute name="type" value="cancelaura"/>
+		</Attributes>
+
+		<Scripts>
+			<OnLoad>
+				local S = unpack(SinarisUI)
+
+				S['Auras_SkinAuras']( self )
+
+				self:RegisterForClicks("RightButtonUp")
+			</OnLoad>
+
+			<OnEnter>
+				local GameTooltip = GameTooltip
+
+				GameTooltip:SetOwner(self, "ANCHOR_BOTTOMLEFT", -5, -5)
+				if (self:GetAttribute("index")) then
+					GameTooltip:SetUnitAura(SecureButton_GetUnit(self:GetParent()), self:GetID(), self.Filter)
+				elseif (self:GetAttribute("target-slot")) then
+					GameTooltip:SetInventoryItem("player", self:GetID())
+				end
+			</OnEnter>
+
+			<OnLeave function="GameTooltip_Hide" />
+		</Scripts>
+	</Button>
+
+	<Button name="AurasTemplate15" inherits="AurasTemplate" virtual="true">
+		<Size x="15" y="15" />
+	</Button>
+
+	<Button name="AurasTemplate16" inherits="AurasTemplate" virtual="true">
+		<Size x="16" y="16" />
+	</Button>
+
+	<Button name="AurasTemplate17" inherits="AurasTemplate" virtual="true">
+		<Size x="17" y="17" />
+	</Button>
+
+	<Button name="AurasTemplate18" inherits="AurasTemplate" virtual="true">
+		<Size x="18" y="18" />
+	</Button>
+
+	<Button name="AurasTemplate19" inherits="AurasTemplate" virtual="true">
+		<Size x="19" y="19" />
+	</Button>
+
+	<Button name="AurasTemplate20" inherits="AurasTemplate" virtual="true">
+		<Size x="20" y="20" />
+	</Button>
+
+	<Button name="AurasTemplate21" inherits="AurasTemplate" virtual="true">
+		<Size x="21" y="21" />
+	</Button>
+
+	<Button name="AurasTemplate22" inherits="AurasTemplate" virtual="true">
+		<Size x="22" y="22" />
+	</Button>
+
+	<Button name="AurasTemplate23" inherits="AurasTemplate" virtual="true">
+		<Size x="23" y="23" />
+	</Button>
+
+	<Button name="AurasTemplate24" inherits="AurasTemplate" virtual="true">
+		<Size x="24" y="24" />
+	</Button>
+
+	<Button name="AurasTemplate25" inherits="AurasTemplate" virtual="true">
+		<Size x="25" y="25" />
+	</Button>
+
+	<Button name="AurasTemplate26" inherits="AurasTemplate" virtual="true">
+		<Size x="26" y="26" />
+	</Button>
+
+	<Button name="AurasTemplate27" inherits="AurasTemplate" virtual="true">
+		<Size x="27" y="27" />
+	</Button>
+
+	<Button name="AurasTemplate28" inherits="AurasTemplate" virtual="true">
+		<Size x="28" y="28" />
+	</Button>
+
+	<Button name="AurasTemplate29" inherits="AurasTemplate" virtual="true">
+		<Size x="29" y="29" />
+	</Button>
+
+	<Button name="AurasTemplate30" inherits="AurasTemplate" virtual="true">
+		<Size x="30" y="30" />
+	</Button>
+
+	<Button name="AurasTemplate31" inherits="AurasTemplate" virtual="true">
+		<Size x="31" y="31" />
+	</Button>
+
+	<Button name="AurasTemplate32" inherits="AurasTemplate" virtual="true">
+		<Size x="32" y="32" />
+	</Button>
+
+	<Button name="AurasTemplate33" inherits="AurasTemplate" virtual="true">
+		<Size x="33" y="33" />
+	</Button>
+
+	<Button name="AurasTemplate34" inherits="AurasTemplate" virtual="true">
+		<Size x="34" y="34" />
+	</Button>
+
+	<Button name="AurasTemplate35" inherits="AurasTemplate" virtual="true">
+		<Size x="35" y="35" />
+	</Button>
+
+	<Button name="AurasTemplate36" inherits="AurasTemplate" virtual="true">
+		<Size x="36" y="36" />
+	</Button>
+
+	<Button name="AurasTemplate37" inherits="AurasTemplate" virtual="true">
+		<Size x="37" y="37" />
+	</Button>
+
+	<Button name="AurasTemplate38" inherits="AurasTemplate" virtual="true">
+		<Size x="38" y="38" />
+	</Button>
+
+	<Button name="AurasTemplate39" inherits="AurasTemplate" virtual="true">
+		<Size x="39" y="39" />
+	</Button>
+
+	<Button name="AurasTemplate40" inherits="AurasTemplate" virtual="true">
+		<Size x="40" y="40" />
+	</Button>
+
+	<Button name="AurasTemplate41" inherits="AurasTemplate" virtual="true">
+		<Size x="41" y="41" />
+	</Button>
+
+	<Button name="AurasTemplate42" inherits="AurasTemplate" virtual="true">
+		<Size x="42" y="42" />
+	</Button>
+
+	<Button name="AurasTemplate43" inherits="AurasTemplate" virtual="true">
+		<Size x="43" y="43" />
+	</Button>
+
+	<Button name="AurasTemplate44" inherits="AurasTemplate" virtual="true">
+		<Size x="44" y="44" />
+	</Button>
+
+	<Button name="AurasTemplate45" inherits="AurasTemplate" virtual="true">
+		<Size x="45" y="45" />
+	</Button>
+
+	<Button name="AurasTemplate46" inherits="AurasTemplate" virtual="true">
+		<Size x="46" y="46" />
+	</Button>
+
+	<Button name="AurasTemplate47" inherits="AurasTemplate" virtual="true">
+		<Size x="47" y="47" />
+	</Button>
+
+	<Button name="AurasTemplate48" inherits="AurasTemplate" virtual="true">
+		<Size x="48" y="48" />
+	</Button>
+
+	<Button name="AurasTemplate49" inherits="AurasTemplate" virtual="true">
+		<Size x="49" y="49" />
+	</Button>
+
+	<Button name="AurasTemplate50" inherits="AurasTemplate" virtual="true">
+		<Size x="50" y="50" />
+	</Button>
+
+	<Button name="AurasTemplate51" inherits="AurasTemplate" virtual="true">
+		<Size x="51" y="51" />
+	</Button>
+
+	<Button name="AurasTemplate52" inherits="AurasTemplate" virtual="true">
+		<Size x="52" y="52" />
+	</Button>
+
+	<Button name="AurasTemplate53" inherits="AurasTemplate" virtual="true">
+		<Size x="53" y="53" />
+	</Button>
+
+	<Button name="AurasTemplate54" inherits="AurasTemplate" virtual="true">
+		<Size x="54" y="54" />
+	</Button>
+
+	<Button name="AurasTemplate55" inherits="AurasTemplate" virtual="true">
+		<Size x="55" y="55" />
+	</Button>
+
+	<Button name="AurasTemplate56" inherits="AurasTemplate" virtual="true">
+		<Size x="56" y="56" />
+	</Button>
+
+	<Button name="AurasTemplate57" inherits="AurasTemplate" virtual="true">
+		<Size x="57" y="57" />
+	</Button>
+
+	<Button name="AurasTemplate58" inherits="AurasTemplate" virtual="true">
+		<Size x="58" y="58" />
+	</Button>
+
+	<Button name="AurasTemplate59" inherits="AurasTemplate" virtual="true">
+		<Size x="59" y="59" />
+	</Button>
+
+	<Button name="AurasTemplate60" inherits="AurasTemplate" virtual="true">
+		<Size x="60" y="60" />
+	</Button>
+
+	<Frame name="AurasProxyTemplate" inherits="SecureUnitButtonTemplate, SecureHandlerEnterLeaveTemplate" virtual="true">
+		<Size x="30" y="30"/>
+
+		<Scripts>
+			<OnLoad>
+				local S = unpack(SinarisUI)
+
+				self.IsProxy = true
+
+				S['Auras_SkinAuras']( self )
+			</OnLoad>
+		</Scripts>
+	</Frame>
+</Ui>

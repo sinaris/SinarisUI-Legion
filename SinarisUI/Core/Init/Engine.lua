@@ -15,4 +15,4 @@ function UIEngine:Unpack()
 	return self[1], self[2], self[3]
 end
 
-_G.Sinaris = UIEngine
+SinarisUI = UIEngine

@@ -7,15 +7,20 @@
 
 local S, L, M = select( 2, ... ):Unpack()
 
+----------------------------------------
+--	Global commands
+----------------------------------------
+SlashCmdList.RELOADUI = function()
+	ReloadUI()
+end
 SLASH_RELOADUI1 = '/rl'
-SlashCmdList.RELOADUI = ReloadUI
 
 ----------------------------------------
 -- SlashHandler
 ----------------------------------------
 local SplitCommand = function( cmd )
 	if( cmd:find( '%s' ) ) then
-		return strsplit( ' ', strlower( cmd ) )
+		return split( ' ', lower( cmd ) )
 	else
 		return cmd
 	end

@@ -24,7 +24,7 @@ GUI['Title']:ApplyStyle()
 
 GUI['Title']['Text'] = S['Construct_FontString']( GUI['Title'], 'OVERLAY', M['Fonts']['Normal'], 16, 'OUTLINE', 'CENTER', true )
 GUI['Title']['Text']:Point( 'CENTER', GUI['Title'], 'CENTER', 0, 0 )
-GUI['Title']['Text']:SetText( '|cff00aaff' .. S['Name'] .. '|r ' .. S['Version'] .. ' - |cffFF6347ConfigUI|r' )
+GUI['Title']['Text']:SetText( '|cff00aaff' .. S['UIName'] .. '|r ' .. S['UIVersion'] .. ' - |cffFF6347ConfigUI|r' )
 
 GUI['Subtitle'] = CreateFrame( 'Frame', nil, GUI )
 GUI['Subtitle']:Point( 'TOP', GUI['Title'], 'BOTTOM', 0, -3 )

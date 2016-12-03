@@ -7,6 +7,8 @@
 
 local S, L, M = select( 2, ... ):Unpack()
 
+local pairs, type = pairs, type
+
 local AccountDataBase = {}
 AccountDataBase = {
 	['General'] = {
@@ -37,3 +39,4 @@ S['DataBase_SetupAccount'] = function()
 		end
 	end
 end
+

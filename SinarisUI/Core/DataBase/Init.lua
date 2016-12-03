@@ -7,6 +7,9 @@
 
 local S, L, M = select( 2, ... ):Unpack()
 
+local pairs, type = pairs, type
+local CreateFrame = CreateFrame
+
 local EventFrame = CreateFrame( 'Frame' )
 EventFrame:RegisterEvent( 'ADDON_LOADED' )
 EventFrame:SetScript( 'OnEvent', function( self, event, ... )
@@ -29,3 +32,4 @@ function EventFrame:ADDON_LOADED( arg1 )
 	S['DataBase_SetupAccount']()
 	S['DataBase_SetupCharacter']()
 end
+

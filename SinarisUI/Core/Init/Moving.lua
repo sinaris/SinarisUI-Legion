@@ -8,13 +8,12 @@
 local S, L, M = select( 2, ... ):Unpack()
 
 local _G = _G
-local match = string.match
-
-
-
+local gsub, match = string.gsub, string.match
+local floor = math.floor
+local CreateFrame = CreateFrame
 
 local CurrentFrame = 'NONE'
-local anchors = { 'CENTER', 'LEFT', 'RIGHT', 'TOP', 'BOTTOM', 'TOPLEFT', 'TOPRIGHT', 'BOTTOMLEFT', 'BOTTOMRIGHT' }
+local FRAME_POINTS = { 'CENTER', 'LEFT', 'RIGHT', 'TOP', 'BOTTOM', 'TOPLEFT', 'TOPRIGHT', 'BOTTOMLEFT', 'BOTTOMRIGHT' }
 local role, selected
 
 local PlaceCurrentFrame = function()
@@ -41,7 +40,7 @@ local Reskinbox = function( Box, Name, Value, Anchor, X, Y )
 	Box['name']:Point( 'BOTTOMLEFT', Box, 'TOPLEFT', 5, 8 )
 	Box['name']:SetText( Name )
 
-	--Box:ApplySkin( 'Edit' )
+	Box:ApplySkin( 'Edit' )
 
 	Box:SetFont( M['Fonts']['Normal'], 12, 'OUTLINE' )
 	Box:SetAutoFocus( false )
@@ -111,27 +110,27 @@ SpecMover['align']:SetAllPoints( UIParent )
 SpecMover['align']:SetFrameStrata( 'MEDIUM' )
 SpecMover['align']:SetFrameLevel( 30 )
 
-local width = S['ScreenWidth'] / 50
-local h = floor( S['ScreenHeight'] / width )
-local w = floor( S['ScreenWidth'] / width )
+local Width = S['ScreenWidth'] / 80
+local h = floor( S['ScreenHeight'] / Width )
+local w = floor( S['ScreenWidth'] / Width )
 
-for i = 0, h do
-	SpecMover['align']['vertical' .. i] = SpecMover['align']:CreateTexture( nil, 'BACKGROUND' )
-	SpecMover['align']['vertical' .. i]:SetTexture( 0.3, 0, 0, 0.7 )
-	SpecMover['align']['vertical' .. i]:Point( 'TOPLEFT', UIParent, 'TOPLEFT', 0, -width * i + 1 )
-	SpecMover['align']['vertical' .. i]:Point( 'BOTTOMRIGHT', UIParent, 'TOPRIGHT', 0, -width * i - 1 )
+for index = 0, h do
+	SpecMover['align']['vertical' .. index] = SpecMover['align']:CreateTexture( nil, 'BACKGROUND' )
+	SpecMover['align']['vertical' .. index]:SetColorTexture( 0.3, 0, 0, 0.7 )
+	SpecMover['align']['vertical' .. index]:Point( 'TOPLEFT', UIParent, 'TOPLEFT', 0, -Width * index + 1 )
+	SpecMover['align']['vertical' .. index]:Point( 'BOTTOMRIGHT', UIParent, 'TOPRIGHT', 0, -Width * index - 1 )
 end
 
-for i = 0, w do
-	SpecMover['align']['horizontal' .. i] = SpecMover['align']:CreateTexture( nil, 'BACKGROUND' )
-	SpecMover['align']['horizontal' .. i]:SetTexture( 0.3, 0, 0, 0.7 )
-	SpecMover['align']['horizontal' .. i]:Point( 'TOPLEFT', UIParent, 'TOPLEFT', width * i -1, 0 )
-	SpecMover['align']['horizontal' .. i]:Point( 'BOTTOMRIGHT', UIParent, 'BOTTOMLEFT', width * i + 1, 0 )
+for index = 0, w do
+	SpecMover['align']['horizontal' .. index] = SpecMover['align']:CreateTexture( nil, 'BACKGROUND' )
+	SpecMover['align']['horizontal' .. index]:SetColorTexture( 0.3, 0, 0, 0.7 )
+	SpecMover['align']['horizontal' .. index]:Point( 'TOPLEFT', UIParent, 'TOPLEFT', Width * index - 1, 0 )
+	SpecMover['align']['horizontal' .. index]:Point( 'BOTTOMRIGHT', UIParent, 'BOTTOMLEFT', Width * index + 1, 0 )
 end
 
 local Point1dropDown = CreateFrame( 'Frame', 'SpecMoverPoint1DropDown', SpecMover, 'UIDropDownMenuTemplate' )
 Point1dropDown:Point( 'TOPLEFT', SpecMover, 'TOPLEFT', 0, -70 )
-Point1dropDown:ApplySkin( 'Drop' )
+--Point1dropDown:ApplySkin( 'Drop' )
 
 Point1dropDown['name'] = S['Construct_FontString']( Point1dropDown, 'OVERLAY', M['Fonts']['Normal'], 12, 'OUTLINE', 'LEFT' )
 Point1dropDown['name']:Point( 'BOTTOMLEFT', Point1dropDown, 'TOPLEFT', 15, 5 )
@@ -142,8 +141,8 @@ UIDropDownMenu_SetText( Point1dropDown, '' )
 
 UIDropDownMenu_Initialize( Point1dropDown, function( self, level, menuList )
 	local info = UIDropDownMenu_CreateInfo()
-	for i =  1, #anchors do
-		info['text'] = anchors[i]
+	for index =  1, #FRAME_POINTS do
+		info['text'] = FRAME_POINTS[index]
 		info['checked'] = function()
 			if( CurrentFrame ~= 'NONE' ) then
 				return ( sCoreCDB['FramePoints'][CurrentFrame][role]['a1'] == info['text'] )
@@ -151,10 +150,10 @@ UIDropDownMenu_Initialize( Point1dropDown, function( self, level, menuList )
 		end
 
 		info['func'] = function( self )
-			sCoreCDB['FramePoints'][CurrentFrame][role]['a1'] = anchors[i]
+			sCoreCDB['FramePoints'][CurrentFrame][role]['a1'] = FRAME_POINTS[index]
 			PlaceCurrentFrame()
-			UIDropDownMenu_SetSelectedName( Point1dropDown, anchors[i], true )
-			UIDropDownMenu_SetText( Point1dropDown, anchors[i] )
+			UIDropDownMenu_SetSelectedName( Point1dropDown, FRAME_POINTS[index], true )
+			UIDropDownMenu_SetText( Point1dropDown, FRAME_POINTS[index] )
 			CloseDropDownMenus()
 		end
 
@@ -168,7 +167,7 @@ Reskinbox( ParentBox, L['MovingFrames']['AnchorFrame'], 'parent', Point1dropDown
 
 local Point2dropDown = CreateFrame( 'Frame', 'SpecMoverPoint2dropDown', SpecMover, 'UIDropDownMenuTemplate' )
 Point2dropDown:Point( 'LEFT', ParentBox, 'RIGHT', -4, -2 )
-Point2dropDown:ApplySkin( 'Drop' )
+--Point2dropDown:ApplySkin( 'Drop' )
 
 Point2dropDown['name'] = S['Construct_FontString']( Point1dropDown, 'OVERLAY', M['Fonts']['Normal'], 12, 'OUTLINE', 'LEFT' )
 Point2dropDown['name']:Point( 'BOTTOMLEFT', Point2dropDown, 'TOPLEFT', 15, 5 )
@@ -179,8 +178,8 @@ UIDropDownMenu_SetText( Point2dropDown, '' )
 
 UIDropDownMenu_Initialize( Point2dropDown, function( self, level, menuList )
 	local info = UIDropDownMenu_CreateInfo()
-	for i =  1, #anchors do
-		info['text'] = anchors[i]
+	for index =  1, #FRAME_POINTS do
+		info['text'] = FRAME_POINTS[index]
 		info['checked'] = function()
 			if( CurrentFrame ~= 'NONE' ) then
 				return ( sCoreCDB['FramePoints'][CurrentFrame][role]['a2'] == info['text'] )
@@ -188,10 +187,10 @@ UIDropDownMenu_Initialize( Point2dropDown, function( self, level, menuList )
 		end
 
 		info['func'] = function( self )
-			sCoreCDB['FramePoints'][CurrentFrame][role]['a2'] = anchors[i]
+			sCoreCDB['FramePoints'][CurrentFrame][role]['a2'] = FRAME_POINTS[index]
 			PlaceCurrentFrame()
-			UIDropDownMenu_SetSelectedName( Point2dropDown, anchors[i], true )
-			UIDropDownMenu_SetText( Point2dropDown, anchors[i] )
+			UIDropDownMenu_SetSelectedName( Point2dropDown, FRAME_POINTS[index], true )
+			UIDropDownMenu_SetText( Point2dropDown, FRAME_POINTS[index] )
 			CloseDropDownMenus()
 		end
 
@@ -207,7 +206,7 @@ local YBox = CreateFrame( 'EditBox', 'SpecMoverYBox', SpecMover )
 YBox:Size( 50, 20 )
 Reskinbox( YBox, L['MovingFrames']['YOffSet'], 'y', XBox, 10, 0 )
 
-local function DisplayCurrentFramePoint()
+local DisplayCurrentFramePoint = function()
 	local points = sCoreCDB['FramePoints'][CurrentFrame][role]
 	UIDropDownMenu_SetText( Point1dropDown, points.a1 )
 	ParentBox:SetText( points.parent )
@@ -219,7 +218,7 @@ end
 local SpecMoverResetButton = CreateFrame( 'Button', 'SpecMoverResetButton', SpecMover )
 SpecMoverResetButton:Point( 'BOTTOMLEFT', SpecMover, 'BOTTOMLEFT', 20, 10 )
 SpecMoverResetButton:Size( 250, 25 )
-SpecMoverResetButton:ApplySkin( 'Button' )
+--SpecMoverResetButton:ApplySkin( 'Button' )
 
 SpecMoverResetButton['Title'] = S['Construct_FontString']( SpecMoverResetButton, 'OVERLAY', M['Fonts']['Normal'], 12, 'OUTLINE', 'CENTER' )
 SpecMoverResetButton['Title']:Point( 'CENTER', SpecMoverResetButton, 'CENTER', 0, 0 )
@@ -302,11 +301,11 @@ S['CreateDragFrame'] = function( Frame )
 			selected = true
 		end
 
-		for i = 1, #S['DragFrameList'] do
-			if( S['DragFrameList'][i]:GetName() == FrameName ) then
-				S['DragFrameList'][i]['DragFrame']:SetBackdropBorderColor( 0, 1, 1 )
+		for index = 1, #S['DragFrameList'] do
+			if( S['DragFrameList'][index]:GetName() == FrameName ) then
+				S['DragFrameList'][index]['DragFrame']:SetBackdropBorderColor( 0, 1, 1, 1 )
 			else
-				S['DragFrameList'][i]['DragFrame']:SetBackdropBorderColor( 1, 0, 0, 1 )
+				S['DragFrameList'][index]['DragFrame']:SetBackdropBorderColor( 1, 0, 0, 1 )
 			end
 		end
 	end )
@@ -320,15 +319,16 @@ local UnlockAll = function()
 			SpecMover['curframe']:SetText( L['MovingFrames']['CurrentFrame'] .. CurrentFrame )
 		end
 
-		for i = 1, #S['DragFrameList'] do
-			S['DragFrameList'][i]['DragFrame']:Show()
-			S['DragFrameList'][i]['DragFrame']:SetBackdropBorderColor( 1, 0, 0, 1 )
+		for index = 1, #S['DragFrameList'] do
+			S['DragFrameList'][index]['DragFrame']:Show()
+			S['DragFrameList'][index]['DragFrame']:SetBackdropBorderColor( 1, 0, 0, 1 )
 		end
 
 		SpecMover:Show()
 	else
 		SpecMover:RegisterEvent( 'PLAYER_REGEN_ENABLED' )
-		print( L['MovingFrames']['EnteringCombat'] )
+
+		S['Print']( 'Red', L['MovingFrames']['EnteringCombat'] )
 	end
 end
 
@@ -343,9 +343,9 @@ local LockAll = function()
 	YBox:Disable()
 	selected = false
 
-	for i = 1, #S['DragFrameList'] do
-		S['DragFrameList'][i]['DragFrame']:Hide()
-		S['DragFrameList'][i]['DragFrame']:SetBackdropBorderColor( 0, 1, 1 )
+	for index = 1, #S['DragFrameList'] do
+		S['DragFrameList'][index]['DragFrame']:Hide()
+		S['DragFrameList'][index]['DragFrame']:SetBackdropBorderColor( 0, 1, 1, 1 )
 	end
 
 	SpecMover:Hide()
@@ -355,20 +355,20 @@ local OnSpecChanged = function()
 	role = S['CheckRole']()
 	SpecMover['curmode']:SetText( L['MovingFrames']['CurrentMode'] .. L['MovingFrames'][role] )
 
-	for i = 1, #S['DragFrameList'] do
-		local name = S['DragFrameList'][i]:GetName()
-		local points = sCoreCDB['FramePoints'][name][role]
+	for index = 1, #S['DragFrameList'] do
+		local Name = S['DragFrameList'][index]:GetName()
+		local Points = sCoreCDB['FramePoints'][Name][role]
 
-		S['DragFrameList'][i]:ClearAllPoints()
-		S['DragFrameList'][i]:Point( points['a1'], _G[points.parent], points['a2'], points['x'], points['y'] )
+		S['DragFrameList'][index]:ClearAllPoints()
+		S['DragFrameList'][index]:Point( Points['a1'], _G[Points.parent], Points['a2'], Points['x'], Points['y'] )
 
-		if( match( name, 'Raid' ) ) then
-			S['DragFrameList'][i]['DragFrame']:ClearAllPoints()
+		if( match( Name, 'Raid' ) ) then
+			S['DragFrameList'][index]['DragFrame']:ClearAllPoints()
 
-			if( match( points['parent'], 'Raid' ) ) then
-				S['DragFrameList'][i]['DragFrame']:Point( points['a1'], points['parent']['DragFrame'], points['a2'], points['x'], points['y'] )
+			if( match( Points['parent'], 'Raid' ) ) then
+				S['DragFrameList'][index]['DragFrame']:Point( Points['a1'], Points['parent']['DragFrame'], Points['a2'], Points['x'], Points['y'] )
 			else
-				S['DragFrameList'][i]['DragFrame']:Point( points['a1'], S['DragFrameList'][i], points['a1'] )
+				S['DragFrameList'][index]['DragFrame']:Point( Points['a1'], S['DragFrameList'][index], Points['a1'] )
 			end
 		end
 	end
@@ -384,7 +384,8 @@ SpecMover:SetScript( 'OnEvent', function( self, event, arg1 )
 	elseif( event == 'PLAYER_REGEN_DISABLED' ) then
 		if( SpecMover:IsShown() ) then
 			LockAll()
-			print( L['MovingFrames']['EnteringCombat'] )
+
+			S['Print']( 'Red', L['MovingFrames']['EnteringCombat'] )
 		end
 	elseif( event == 'PLAYER_REGEN_ENABLED' ) then
 		UnlockAll()
@@ -401,7 +402,7 @@ SpecMover:RegisterEvent( 'PLAYER_LOGIN' )
 local SpecMoverLockButton = CreateFrame( 'Button', 'SpecMoverLockButton', SpecMover )
 SpecMoverLockButton:Point( 'LEFT', SpecMoverResetButton, 'RIGHT', 10, 0 )
 SpecMoverLockButton:Size( 250, 25 )
-SpecMoverLockButton:ApplySkin( 'Button' )
+--SpecMoverLockButton:ApplySkin( 'Button' )
 
 SpecMoverLockButton['Title'] = S['Construct_FontString']( SpecMoverLockButton, 'OVERLAY', M['Fonts']['Normal'], 12, 'OUTLINE', 'CENTER' )
 SpecMoverLockButton['Title']:Point( 'CENTER', SpecMoverLockButton, 'CENTER', 0, 0 )
@@ -416,15 +417,15 @@ local IntroOptions = ConfigUIIntroFrame
 local ResetPositionsButtonn = CreateFrame( 'Button', 'ResetPositionsButtonn', IntroOptions )
 ResetPositionsButtonn:Point( 'BOTTOMLEFT', IntroOptions, 'BOTTOMLEFT', 40, 60 )
 ResetPositionsButtonn:Size( 190, 25 )
-ResetPositionsButtonn:ApplySkin( 'Button' )
+--ResetPositionsButtonn:ApplySkin( 'Button' )
 
 ResetPositionsButtonn['Title'] = S['Construct_FontString']( ResetPositionsButtonn, 'OVERLAY', M['Fonts']['Normal'], 12, 'OUTLINE', 'CENTER' )
 ResetPositionsButtonn['Title']:Point( 'CENTER', ResetPositionsButtonn, 'CENTER', 0, 0 )
 ResetPositionsButtonn['Title']:SetText( L['MovingFrames']['ResetAllFrames'] )
 
 ResetPositionsButtonn:SetScript( 'OnClick', function()
-	for i = 1, #S['DragFrameList'] do
-		local f = S['DragFrameList'][i]
+	for index = 1, #S['DragFrameList'] do
+		local f = S['DragFrameList'][index]
 		sCoreCDB['FramePoints'][f:GetName()] = {}
 
 		for role, points in pairs( f['point'] ) do
@@ -445,7 +446,7 @@ end )
 local UnlockFramesButton = CreateFrame( 'Button', 'UnlockFramesButton', IntroOptions )
 UnlockFramesButton:Point( 'LEFT', ResetPositionsButtonn, 'RIGHT', 20, 0 )
 UnlockFramesButton:Size( 190, 25 )
-UnlockFramesButton:ApplySkin( 'Button' )
+--UnlockFramesButton:ApplySkin( 'Button' )
 
 UnlockFramesButton['Title'] = S['Construct_FontString']( UnlockFramesButton, 'OVERLAY', M['Fonts']['Normal'], 12, 'OUTLINE', 'CENTER' )
 UnlockFramesButton['Title']:Point( 'CENTER', UnlockFramesButton, 'CENTER', 0, 0 )
@@ -453,13 +454,9 @@ UnlockFramesButton['Title']:SetText( L['MovingFrames']['UnlockAllFrames'] )
 
 UnlockFramesButton:SetScript( 'OnClick', function()
 	UnlockAll()
+
 	if( ConfigUI:IsShown() ) then
 		ConfigUI:Hide()
 	end
 	
 end )
-
-
-
-
-
